@@ -85,7 +85,7 @@ namespace VRServerApp
                     response2 = p.ToString();
                     sendBytes2 = Encoding.ASCII.GetBytes(response2);
                     clientSocket.Send(sendBytes2);
-                    //Console.WriteLine(" - Responding: " + response2);
+                    Console.WriteLine(" - Responding: " + response2);
                 }
             }
             catch (Exception ex)
