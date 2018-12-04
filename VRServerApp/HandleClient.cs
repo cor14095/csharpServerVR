@@ -47,18 +47,8 @@ namespace VRServerApp
                 // Tell the client that we have started.
                 clientSocket.Send(sendBytes);
 
-
-                Console.WriteLine("Compiling steps...");
-                CodeSnippetCompileUnit compileUnit = new CodeSnippetCompileUnit(data); Console.WriteLine("\t1...");
-                CodeDomProvider provider = new CSharpCodeProvider(); Console.WriteLine("\t2...");
-                // Compile the parameters.
-                CompilerParameters cParameters = new CompilerParameters(); Console.WriteLine("\t3...");
-                // Generate a compiled version of everything.
-                CompilerResults results = provider.CompileAssemblyFromDom(cParameters, compileUnit); Console.WriteLine("\t4...");
-                // Get the type for method. 
-                Type type = results.CompiledAssembly.GetType("test.MyType"); Console.WriteLine("\t5...");
-                MethodInfo method = type.GetMethod("Evaluate", BindingFlags.Static | BindingFlags.Public); Console.WriteLine("\t6...");
-                Console.WriteLine("Compiling successful!");
+                HandleCompile compiler = new HandleCompile(data);
+                var method = compiler.compileCode() as MethodInfo;
 
                 Console.WriteLine("Evaluation start...");
                 while (data2 != "quit")
@@ -90,7 +80,7 @@ namespace VRServerApp
                     var py = float.Parse(ps[2],
                         System.Globalization.CultureInfo.InvariantCulture.NumberFormat);
 
-                    var p = (double)method.Invoke(null, new object[] { px, pz, py });
+                    var p = (double)method.Invoke(compiler.instance, new object[] { px, pz, py });
 
                     response2 = p.ToString();
                     sendBytes2 = Encoding.ASCII.GetBytes(response2);
