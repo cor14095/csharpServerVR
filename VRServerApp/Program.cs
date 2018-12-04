@@ -9,8 +9,8 @@ namespace VRServerApp
     {
         static void Main(string[] args)
         {
-            //IPAddress address = IPAddress.Parse("127.0.0.1");   // Localhost.
-            IPAddress address = IPAddress.Parse("0.0.0.0");   // Not Localhost.
+            IPAddress address = IPAddress.Parse("127.0.0.1");   // Localhost.
+            //IPAddress address = IPAddress.Parse("0.0.0.0");   // Not Localhost.
             TcpListener serverSocket = new TcpListener(address, 8081);
             Socket clientSocket = default(Socket);
             int counter = 0;
