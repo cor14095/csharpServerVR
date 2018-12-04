@@ -101,6 +101,7 @@ namespace VRServerApp
             catch (Exception ex)
             {
                 Console.WriteLine("End Of evaluation.");
+                Console.WriteLine(ex.Message);
             }
 
         }
